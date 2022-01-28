@@ -42,9 +42,10 @@ const resolvers = {
     },
     removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
+        const removedBook = await Book.findOne({ bookId: bookId });
         const user = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: bookId } },
+          { $pull: { savedBooks: removedBook } },
           { new: true }
         );
         return user;
