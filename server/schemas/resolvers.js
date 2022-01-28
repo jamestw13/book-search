@@ -38,6 +38,7 @@ const resolvers = {
         );
         return user;
       }
+      throw new AuthenticationError('User must be logged in.');
     },
     removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
@@ -48,6 +49,7 @@ const resolvers = {
         );
         return user;
       }
+      throw new AuthenticationError('User must be logged in.');
     },
   },
 };
